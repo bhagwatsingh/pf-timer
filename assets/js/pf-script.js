@@ -1,6 +1,4 @@
-jQuery( document ).ready(function($) {
-
-   // $('.wplc-color-box').wpColorPicker();
+jQuery(document).ready(function ($) {
 
     $('.pf_timer_expiry_date').datetimepicker({
         dateFormat: 'yy-mm-dd',
@@ -10,27 +8,16 @@ jQuery( document ).ready(function($) {
         changeYear: true,
     });
 
-/*    $(".wpcdt-circle-slider").slider({
-        min: 0.0033333333333333335,
-        max: 0.13333333333333333,
-        step: 0.003333333,
-        slide: function (event, ui) {
-            $(this).parent().find(".wpcdt-number").val(ui.value);
-        },
-        create: function(event, ui){
-            $(this).slider('value',$(this).parent().find(".wpcdt-number").val());
-        }
-    });
+    $('.pf_timer_bg_color,.pf_timer_font_color').wpColorPicker();
 
-    $(".wpcdt-background-slider").slider({
-        min: 0.1,
-        max: 3,
-        step: 0.1,
-        slide: function (event, ui) {
-            $(this).parent().find(".wpcdt-number").val(ui.value);
-        },
-        create: function(event, ui){
-            $(this).slider('value',$(this).parent().find(".wpcdt-number").val());
-        }
-    });*/
+    var pf_timer_font_size = document.getElementById("pf_timer_font_size");
+    var pf_timer_border_radius = document.getElementById("pf_timer_border_radius");
+
+    pf_timer_font_size.oninput = function() {
+        document.getElementById("pf_timer_font_size_span").innerHTML = this.value+"px";
+    }
+    pf_timer_border_radius.oninput = function() {
+        document.getElementById("pf_timer_border_radius_span").innerHTML = this.value+"px";
+    }
+
 });

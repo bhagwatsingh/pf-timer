@@ -194,6 +194,35 @@ class PFTimer {
 			'pf-timer-setting-admin',
 			'setting_section_id'
 		);
+		add_settings_field(
+			'pf_timer_border_radius',
+			'Box Circle',
+			array( $this, 'pf_timer_border_radius_callback' ),
+			'pf-timer-setting-admin',
+			'setting_section_id'
+		);
+		add_settings_field(
+			'pf_timer_bg_color',
+			'Background Color',
+			array( $this, 'pf_timer_bg_color_callback' ),
+			'pf-timer-setting-admin',
+			'setting_section_id'
+		);
+		add_settings_field(
+			'pf_timer_font_color',
+			'Text Color',
+			array( $this, 'pf_timer_font_color_callback' ),
+			'pf-timer-setting-admin',
+			'setting_section_id'
+		);
+		add_settings_field(
+			'pf_timer_font_size',
+			'Text Size',
+			array( $this, 'pf_timer_font_size_callback' ),
+			'pf-timer-setting-admin',
+			'setting_section_id'
+		);
+
 
 	}
 
@@ -219,7 +248,18 @@ class PFTimer {
 		if ( isset( $input['pf_timer_redirect_url'] ) ) {
 			$new_input['pf_timer_redirect_url'] = sanitize_trackback_urls( $input['pf_timer_redirect_url'] );
 		}
-
+		if ( isset( $input['pf_timer_bg_color'] ) ) {
+			$new_input['pf_timer_bg_color'] = sanitize_text_field( $input['pf_timer_bg_color'] );
+		}
+		if ( isset( $input['pf_timer_font_color'] ) ) {
+			$new_input['pf_timer_font_color'] = sanitize_text_field( $input['pf_timer_font_color'] );
+		}
+		if ( isset( $input['pf_timer_font_size'] ) ) {
+			$new_input['pf_timer_font_size'] = sanitize_text_field( $input['pf_timer_font_size'] );
+		}
+		if ( isset( $input['pf_timer_border_radius'] ) ) {
+			$new_input['pf_timer_border_radius'] = sanitize_text_field( $input['pf_timer_border_radius'] );
+		}
 
 		return $new_input;
 	}
@@ -677,4 +717,36 @@ class PFTimer {
 			isset( $this->options['pf_timer_redirect_url'] ) ? esc_attr( $this->options['pf_timer_redirect_url'] ) : ''
 		);
 	}
+
+	public function pf_timer_bg_color_callback() {
+		printf(
+			'<input type="text" id="pf_timer_bg_color" name="pf_timer_option_name[pf_timer_bg_color]" value="%s" class="pf_timer_bg_color" data-default-color="#555555"/>',
+			isset( $this->options['pf_timer_bg_color'] ) ? esc_attr( $this->options['pf_timer_bg_color'] ) : '#555555'
+		);
+	}
+
+	public function pf_timer_font_color_callback() {
+		printf(
+			'<input type="text" id="pf_timer_bg_color" name="pf_timer_option_name[pf_timer_font_color]" value="%s" class="pf_timer_font_color" data-default-color="#efefef"/>',
+			isset( $this->options['pf_timer_font_color'] ) ? esc_attr( $this->options['pf_timer_font_color'] ) : '#efefef'
+		);
+	}
+
+	public function pf_timer_font_size_callback() {
+		$default = isset( $this->options['pf_timer_font_size'] ) ? esc_attr( $this->options['pf_timer_font_size'] ) : '24';
+		printf(
+			'<div class="slidecontainer"><input type="range" min="12" max="100" id="pf_timer_font_size" name="pf_timer_option_name[pf_timer_font_size]" value="%s" class="pf_timer_slider" /> <span id="pf_timer_font_size_span">%spx</span></div>',
+			$default, $default
+		);
+	}
+
+	public function pf_timer_border_radius_callback() {
+		$default = isset( $this->options['pf_timer_border_radius'] ) ? esc_attr( $this->options['pf_timer_border_radius'] ) : '0';
+		printf(
+			'<div class="slidecontainer"><input type="range"  min="1" max="100" id="pf_timer_border_radius" name="pf_timer_option_name[pf_timer_border_radius]" value="%s" class="pf_timer_slider" /> <span id="pf_timer_border_radius_span">%spx</span></div>',
+			$default, $default
+		);
+	}
+
+
 }
