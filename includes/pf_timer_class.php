@@ -189,7 +189,9 @@ class PFTimer {
 	}
 
 	public function pf_timer_admin_list_page() {
-        echo 'List';
+		$this->options = get_option( 'pf_timer_option_name' );
+		print_r($this->options);
+		//foreach()
 	}
 
 	/**
