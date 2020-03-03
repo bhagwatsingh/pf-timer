@@ -10,6 +10,7 @@ class PFTimer {
 	 * Start up
 	 */
 	public function __construct() {
+		add_action( 'plugin_action_links_' . PF_TIMER_PLUGIN_BASENAME, array( $this, 'pf_timer__action_links') );
 		add_action( 'admin_menu', array( $this, 'add_pf_timer_admin_page' ) );
 		add_action( 'admin_init', array( $this, 'pf_timer_init' ) );
 
@@ -24,7 +25,67 @@ class PFTimer {
 
 		// Action to add script in backend
 		add_action( 'admin_enqueue_scripts', array( $this, 'pf_timer_admin_script' ) );
+
+		/**
+		 * Activation Hook
+		 *
+		 * Register plugin activation hook.
+		 *
+		 * @package PF Timer
+		 * @since 1.0.0
+		 */
+		register_activation_hook( PF_TIMER_BASE_FILE, array( $this, 'pf_timer_install' ));
+
+		/**
+		 * Deactivation Hook
+		 *
+		 * Register plugin deactivation hook.
+		 *
+		 * @package PF Timer
+		 * @since 1.0.0
+		 */
+		register_deactivation_hook( PF_TIMER_BASE_FILE, array( $this, 'pf_timer_uninstall' ));
 	}
+
+	/**
+	 * Plugin Setup (On Activation)
+	 *
+	 * Does the initial setup,
+	 * stest default values for the plugin options.
+	 *
+	 * @package PF Timer
+	 * @since 1.0.0
+	 */
+	public function pf_timer_install() {
+
+		// IMP need to flush rules for custom registered post type
+		flush_rewrite_rules();
+	}
+
+	/**
+	 * Plugin Setup (On Deactivation)
+	 *
+	 * Delete plugin options.
+	 *
+	 * @package PF Timer
+	 * @since 1.0.0
+	 */
+
+	public function pf_timer_uninstall() {
+
+		// IMP need to flush rules for custom registered post type
+		flush_rewrite_rules();
+	}
+
+	public function pf_timer__action_links( $links ) {
+
+	$links = array_merge( array(
+		'<a href="' . esc_url( admin_url( '/admin.php?page=pf-timer-setting-admin' ) ) . '">' . __( 'Settings', 'textdomain' ) . '</a>'
+	), $links );
+
+	return $links;
+
+}
 
 	/**
 	 * Function to add style at front side
@@ -91,7 +152,6 @@ class PFTimer {
 
 		wp_enqueue_script( 'wp-color-picker' );
 		wp_enqueue_script( 'jquery-ui-datepicker' );
-		//wp_enqueue_script( 'jquery-ui-slider' );
 
 		wp_register_script( 'pf-ui-timepicker-addon-js', PF_TIMER_URL . 'assets/js/pf-ui-timepicker-addon.js', array( 'jquery' ), PF_TIMER_VERSION, true );
 		wp_enqueue_script( 'pf-ui-timepicker-addon-js' );
@@ -109,19 +169,33 @@ class PFTimer {
 	 */
 	public function add_pf_timer_admin_page() {
 		// This page will be under "Settings"
-		add_options_page(
-			'PF Timer Settings',
-			'PF Timer Settings',
+		add_menu_page(
+			'PF Timer',
+			'PF Timer',
 			'manage_options',
-			'pf-timer-setting-admin',
-			array( $this, 'create_pf_timer_admin_page' )
+			PF_TIMER_SLUG,
+			array( $this, 'pf_timer_admin_list_page' )
 		);
+
+		//add_submenu_page( PF_TIMER_SLUG, string '', string $menu_title, string $capability, string $menu_slug, callable $function = '', int $position = null )
+		add_submenu_page(
+			PF_TIMER_SLUG,
+			'Create PF Timer',
+			'Create',
+			'manage_options',
+			PF_TIMER_SLUG . '_create',
+			array( $this, 'pf_timer_admin_create_page' )
+		);
+	}
+
+	public function pf_timer_admin_list_page() {
+        echo 'List';
 	}
 
 	/**
 	 * Options page callback
 	 */
-	public function create_pf_timer_admin_page() {
+	public function pf_timer_admin_create_page() {
 		// Set class property
 		$this->options = get_option( 'pf_timer_option_name' );
 		?>
@@ -130,7 +204,7 @@ class PFTimer {
 				<?php
 				// This prints out all hidden setting fields
 				settings_fields( 'pf_timer_option_group' );
-				do_settings_sections( 'pf-timer-setting-admin' );
+				do_settings_sections( PF_TIMER_SLUG . '_create' );
 				submit_button();
 				?>
             </form>
@@ -150,16 +224,16 @@ class PFTimer {
 
 		add_settings_section(
 			'setting_section_id', // ID
-			'PF Timer Settings', // Title
+			'Create PF Timer', // Title
 			array( $this, 'print_section_info' ), // Callback
-			'pf-timer-setting-admin' // Page
+			PF_TIMER_SLUG . '_create' // Page
 		);
 
 		add_settings_field(
 			'pf_timer_title', // ID
 			'Timer Title', // Title
 			array( $this, 'pf_timer_title_callback' ), // Callback
-			'pf-timer-setting-admin', // Page
+			PF_TIMER_SLUG . '_create', // Page
 			'setting_section_id' // Section
 		);
 
@@ -167,7 +241,7 @@ class PFTimer {
 			'pf_timer_subtitle',
 			'Timer Subtitle',
 			array( $this, 'pf_timer_subtitle_callback' ),
-			'pf-timer-setting-admin',
+			PF_TIMER_SLUG . '_create',
 			'setting_section_id'
 		);
 
@@ -175,7 +249,7 @@ class PFTimer {
 			'pf_timer_expiry_date',
 			'Expiry Date',
 			array( $this, 'pf_timer_expiry_date_callback' ),
-			'pf-timer-setting-admin',
+			PF_TIMER_SLUG . '_create',
 			'setting_section_id'
 		);
 
@@ -183,7 +257,7 @@ class PFTimer {
 			'pf_timer_timezone',
 			'Timezone',
 			array( $this, 'pf_timer_timezone_callback' ),
-			'pf-timer-setting-admin',
+			PF_TIMER_SLUG . '_create',
 			'setting_section_id'
 		);
 
@@ -191,35 +265,35 @@ class PFTimer {
 			'pf_timer_redirect_url',
 			'Redirect URL',
 			array( $this, 'pf_timer_redirect_url_callback' ),
-			'pf-timer-setting-admin',
+			PF_TIMER_SLUG . '_create',
 			'setting_section_id'
 		);
 		add_settings_field(
 			'pf_timer_border_radius',
 			'Box Circle',
 			array( $this, 'pf_timer_border_radius_callback' ),
-			'pf-timer-setting-admin',
+			PF_TIMER_SLUG . '_create',
 			'setting_section_id'
 		);
 		add_settings_field(
 			'pf_timer_bg_color',
 			'Background Color',
 			array( $this, 'pf_timer_bg_color_callback' ),
-			'pf-timer-setting-admin',
+			PF_TIMER_SLUG . '_create',
 			'setting_section_id'
 		);
 		add_settings_field(
 			'pf_timer_font_color',
 			'Text Color',
 			array( $this, 'pf_timer_font_color_callback' ),
-			'pf-timer-setting-admin',
+			PF_TIMER_SLUG . '_create',
 			'setting_section_id'
 		);
 		add_settings_field(
 			'pf_timer_font_size',
 			'Text Size',
 			array( $this, 'pf_timer_font_size_callback' ),
-			'pf-timer-setting-admin',
+			PF_TIMER_SLUG . '_create',
 			'setting_section_id'
 		);
 
