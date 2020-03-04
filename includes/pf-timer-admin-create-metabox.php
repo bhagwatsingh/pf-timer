@@ -426,6 +426,32 @@ $pf_timer_font_color = ( $pf_timer_font_color != '' ) ? $pf_timer_font_color : '
 
 $pf_timer_font_size = get_post_meta( $post->ID, 'pf_timer_font_size', true );
 $pf_timer_font_size = ( $pf_timer_font_size != '' ) ? $pf_timer_font_size : '24';
+
+
+
+$pf_timer_days_label = get_post_meta( $post->ID, 'pf_timer_days_label', true );
+$pf_timer_days_label = ( $pf_timer_days_label != '' ) ? $pf_timer_days_label : 'Days';
+
+$pf_timer_hours_label = get_post_meta( $post->ID, 'pf_timer_hours_label', true );
+$pf_timer_hours_label = ( $pf_timer_hours_label != '' ) ? $pf_timer_hours_label : 'Hours';
+
+$pf_timer_minutes_label = get_post_meta( $post->ID, 'pf_timer_minutes_label', true );
+$pf_timer_minutes_label = ( $pf_timer_minutes_label != '' ) ? $pf_timer_minutes_label : 'Minutes';
+
+$pf_timer_seconds_label = get_post_meta( $post->ID, 'pf_timer_seconds_label', true );
+$pf_timer_seconds_label = ( $pf_timer_seconds_label != '' ) ? $pf_timer_seconds_label : 'Seconds';
+
+$pf_timer_days_label_show = get_post_meta( $post->ID, 'pf_timer_days_label_show', true );
+$pf_timer_days_label_checked = ( $pf_timer_days_label_show == '0' ) ? '' : 'checked';
+
+$pf_timer_hours_label_show = get_post_meta( $post->ID, 'pf_timer_hours_label_show', true );
+$pf_timer_hours_label_checked = ( $pf_timer_hours_label_show == '0' ) ? '' : 'checked';
+
+$pf_timer_minutes_label_show = get_post_meta( $post->ID, 'pf_timer_minutes_label_show', true );
+$pf_timer_minutes_label_checked = ( $pf_timer_minutes_label_show == '0' ) ? '' : 'checked';
+
+$pf_timer_seconds_label_show = get_post_meta( $post->ID, 'pf_timer_seconds_label_show', true );
+$pf_timer_seconds_label_checked = ( $pf_timer_seconds_label_show == '0' ) ? '' : 'checked';
 ?>
 <table>
 
@@ -492,4 +518,36 @@ $pf_timer_font_size = ( $pf_timer_font_size != '' ) ? $pf_timer_font_size : '24'
         </td>
     </tr>
 
+</table>
+<h2>Labels</h2>
+<table>
+
+    <tr>
+        <td>Days Label</td>
+        <td>
+            <input type="text" id="pf_timer_days_label" name="pf_timer_days_label" value="<?php echo $pf_timer_days_label; ?>"/>
+            <input type="checkbox" id="pf_timer_days_label_show" name="pf_timer_days_label_show" <?php echo $pf_timer_days_label_checked;?> value="1">
+        </td>
+    </tr>
+    <tr>
+        <td>Hours Label</td>
+        <td>
+            <input type="text" id="pf_timer_hours_label" name="pf_timer_hours_label" value="<?php echo $pf_timer_hours_label; ?>"/>
+            <input type="checkbox" id="pf_timer_hours_label_show" name="pf_timer_hours_label_show" <?php echo $pf_timer_hours_label_checked;?> value="1">
+        </td>
+    </tr>
+    <tr>
+        <td>Minutes Label</td>
+        <td>
+            <input type="text" id="pf_timer_minutes_label" name="pf_timer_minutes_label" value="<?php echo $pf_timer_minutes_label; ?>"/>
+            <input type="checkbox" id="pf_timer_minutes_label_show" name="pf_timer_minutes_label_show" <?php echo $pf_timer_minutes_label_checked;?> value="1">
+        </td>
+    </tr>
+    <tr>
+        <td>Seconds Label</td>
+        <td>
+            <input type="text" id="pf_timer_seconds_label" name="pf_timer_seconds_label" value="<?php echo $pf_timer_seconds_label ?>"/>
+            <input type="checkbox" id="pf_timer_seconds_label_show" name="pf_timer_seconds_label_show" <?php echo $pf_timer_seconds_label_checked;?> value="1">
+        </td>
+    </tr>
 </table>

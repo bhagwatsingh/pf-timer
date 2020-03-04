@@ -13,11 +13,10 @@ jQuery(document).ready(function ($) {
     var pf_timer_font_size = document.getElementById("pf_timer_font_size");
     var pf_timer_border_radius = document.getElementById("pf_timer_border_radius");
 
-    pf_timer_font_size.oninput = function() {
-        document.getElementById("pf_timer_font_size_span").innerHTML = this.value+"px";
+    pf_timer_font_size.oninput = function () {
+        document.getElementById("pf_timer_font_size_span").innerHTML = this.value + "px";
     }
-    pf_timer_border_radius.oninput = function() {
-        document.getElementById("pf_timer_border_radius_span").innerHTML = this.value+"px";
+    pf_timer_border_radius.oninput = function () {
+        document.getElementById("pf_timer_border_radius_span").innerHTML = this.value + "px";
     }
-
 });
