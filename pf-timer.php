@@ -65,8 +65,8 @@ if ( ! defined( 'PF_TIMER_PLUGIN_PLUGIN_BASENAME' ) ) {
 	define( 'PF_TIMER_PLUGIN_PLUGIN_BASENAME', plugin_basename( PF_TIMER_PLUGIN_BASE_FILE ) ); // plugin file with current plugin directory.
 }
 if ( ! defined( 'PF_TIMER_PLUGIN_META_PREFIX' ) ) {
-	define( 'PF_TIMER_PLUGIN_META_PREFIX', '_' . PF_TIMER_PLUGIN_POST_TYPE . '_' ); // Plugin metabox prefix.
+	define( 'PF_TIMER_PLUGIN_META_PREFIX', '_' . PF_TIMER_PLUGIN_POST_TYPE . '_' );
 }
 
-require_once( PF_TIMER_PLUGIN_DIR . '/includes/pf_timer_class.php' );
+require_once PF_TIMER_PLUGIN_DIR . '/includes/ class-pftimer.php';
 $pf_timer = new PFTimer();

@@ -1,63 +1,63 @@
 .pf-timer-container {
-    margin: 0 0 35px;
+	margin: 0 0 35px;
 }
 
 .webinar-countdown__title {
-    color: #333333;
-    font-size: 1.125rem;
-    font-weight: 700;
-    margin: 0 0 15px;
-    padding: 0;
-    text-align: center;
+	color: #333333;
+	font-size: 1.125rem;
+	font-weight: 700;
+	margin: 0 0 15px;
+	padding: 0;
+	text-align: center;
 }
 
 .pf-timer-container ul {
-    display: block;
-    list-style: outside none none;
-    margin: 0 auto;
-    padding: 0;
-    width: 254px;
+	display: block;
+	list-style: outside none none;
+	margin: 0 auto;
+	padding: 0;
+	width: 254px;
 }
 
 .pf-timer-container ul li {
-    float: left;
-    margin: 0 3px;
-    text-align: center;
+	float: left;
+	margin: 0 3px;
+	text-align: center;
 }
 
 .pf-timer-container ul li .flap {
-    background-color: #000001;
-    border-radius: 3px;
-    display: table-cell;
-    height: 56px;
-    padding: 10px 0;
-    vertical-align: middle;
-    width: 56px;
+	background-color: #000001;
+	border-radius: 3px;
+	display: table-cell;
+	height: 56px;
+	padding: 10px 0;
+	vertical-align: middle;
+	width: 56px;
 }
 
 .pf-timer-container ul li .flap span {
-    color: #fafafa;
-    display: inline-block;
-    font-size: 36px;
-    font-weight: 700;
-    line-height: 36px;
-    position: relative;
-    text-align: center;
-    width: 100%;
+	color: #fafafa;
+	display: inline-block;
+	font-size: 36px;
+	font-weight: 700;
+	line-height: 36px;
+	position: relative;
+	text-align: center;
+	width: 100%;
 }
 
 .pf-timer-container ul p {
-    color: #555555;
-    display: inline-block;
-    float: left;
-    font-size: 11px;
-    font-weight: 700;
-    line-height: 11px;
-    margin: 1px 0 0;
-    text-align: center;
-    width: 100%;
+	color: #555555;
+	display: inline-block;
+	float: left;
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 11px;
+	margin: 1px 0 0;
+	text-align: center;
+	width: 100%;
 }
 
 .hide {
-    display: none;
+	display: none;
 }
