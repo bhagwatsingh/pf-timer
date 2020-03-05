@@ -1,6 +1,14 @@
-/*! jQuery Timepicker Addon - v1.6.3 - 2016-04-20
-* http://trentrichardson.com/examples/timepicker
-* Copyright (c) 2016 Trent Richardson; Licensed MIT */
+/**
+ * Addons jQuery Timepicker  - v1.6.3 - 2016-04-20
+ *
+ * @category JS
+ * @package PFTimer
+ * @since 1.0.0
+ * @subpackage PFTimer/assets/js
+ * @author Trent Richardson
+ * @copyright (c) 2016 Trent Richardson
+ */
+
 (function (factory) {
 	if (typeof define === 'function' && define.amd) {
 		define( ['jquery', 'jquery-ui'], factory );
@@ -255,9 +263,7 @@
 						tp_inst._defaults.controlType = 'select';
 					}
 					tp_inst.control = tp_inst._controls[tp_inst._defaults.controlType];
-				}
-				/* controlType is an object and must implement create, options, value methods */
-				else {
+				} else { /* controlType is an object and must implement create, options, value methods */
 					tp_inst.control = tp_inst._defaults.controlType;
 				}
 
@@ -1278,7 +1284,8 @@
 				};
 
 				if (finds) {
-					for (var i = 0; i < finds.length; i++) {
+					var i = 0;
+					for (i = 0; i < finds.length; i++) {
 						if (orders[finds[i].toString().charAt( 0 )] === -1) {
 							orders[finds[i].toString().charAt( 0 )] = i + 1;
 						}
@@ -1809,7 +1816,7 @@
 				currDT = tp_inst.$input.val() + ' ' + tp_inst.$altInput.val();
 			} else if (tp_inst.$input.get( 0 ).tagName !== 'INPUT' && tp_inst.$altInput) {
 				/**
-				 * in case the datetimepicker has been applied to a non-input tag for inline UI,
+				 * In case the datetimepicker has been applied to a non-input tag for inline UI,
 				 * and the user has not configured the plugin to display only time in altInput,
 				 * pick current date time from the altInput (and hope for the best, for now, until "ER1" is applied)
 				 *
@@ -1850,9 +1857,10 @@
 		try {
 			date = this._base_parseDate( format, value, settings );
 		} catch (err) {
-			/* Hack!  The error message ends with a colon, a space, and
-			 the "extra" characters.  We rely on that instead of
-			 attempting to perfectly reproduce the parsing algorithm. */
+			/** Hack!  The error message ends with a colon, a space, and
+			 * the "extra" characters.  We rely on that instead of
+			 * attempting to perfectly reproduce the parsing algorithm.
+			 **/
 			if (err.indexOf( ":" ) >= 0) {
 				date = this._base_parseDate( format, value.substring( 0, value.length - (err.length - err.indexOf( ':' ) - 2) ), settings );
 				$.timepicker.log( "Error parsing the date string: " + err + "\ndate string = " + value + "\ndate format = " + format );
@@ -1958,9 +1966,10 @@
 				tp_inst._defaults.onSelect = onselect;
 			}
 
-			/* Datepicker will override our date when we call _base_optionDatepicker when
-			 calling minDate/maxDate, so we will first grab the value, call
-			 _base_optionDatepicker, then set our value back. */
+			/** Datepicker will override our date when we call _base_optionDatepicker when
+			 * calling minDate/maxDate, so we will first grab the value, call
+			 *_base_optionDatepicker, then set our value back.
+			 **/
 			if (min || max) {
 				$target = $( target );
 				oldVal  = $target.datetimepicker( 'getDate' );
@@ -2378,5 +2387,4 @@
 	* Keep up with the version
 	*/
 	$.timepicker.version = "1.6.3";
-
 }));

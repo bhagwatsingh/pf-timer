@@ -65,5 +65,5 @@ if ( ! defined( 'PF_TIMER_PLUGIN_META_PREFIX' ) ) {
 	define( 'PF_TIMER_PLUGIN_META_PREFIX', '_' . PF_TIMER_PLUGIN_POST_TYPE . '_' );
 }
 
-require_once PF_TIMER_PLUGIN_DIR . '/includes/ class-pftimer.php';
+require_once PF_TIMER_PLUGIN_DIR . '/includes/class-pftimer.php';
 $pf_timer = new PFTimer();
