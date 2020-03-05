@@ -47,11 +47,14 @@ class PFTimer {
 
 			add_action( 'admin_menu', array( $this, 'add_pf_timer_admin_page' ) );
 			// Add Short Column to post list.
-			add_filter( 'manage_pf_timer_posts_columns', array( $this, 'pf_timer_columns' ) );
-			add_action( 'manage_pf_timer_posts_custom_column', array( $this, 'pf_timer_column' ), 10, 2 );
+			add_filter( 'manage_pf-timer_posts_columns', array( $this, 'pf_timer_columns' ) );
+			add_action( 'manage_pf-timer_posts_custom_column', array( $this, 'pf_timer_column' ), 10, 2 );
 
 			// Add Action links to plugins list.
-			add_action( 'plugin_action_links_' . PF_TIMER_PLUGIN_PLUGIN_BASENAME, array( $this, 'pf_timer__action_links' ) );
+			add_action( 'plugin_action_links_' . PF_TIMER_PLUGIN_PLUGIN_BASENAME, array(
+				$this,
+				'pf_timer__action_links'
+			) );
 
 			// Add metaboxes for timer settings.
 			add_action( 'add_meta_boxes', array( $this, 'pf_timer_post_sett_metabox' ) );
@@ -163,6 +166,7 @@ class PFTimer {
 	 * Function to add action link at plugin list.
 	 *
 	 * @param string $links action links.
+	 *
 	 * @return string $links action links.
 	 *
 	 * @package PF Timer
@@ -279,7 +283,7 @@ class PFTimer {
 		$pf_timer_post_lbls = apply_filters(
 			'pf_timer_post_labels',
 			array(
-				'name'               => __( 'PF Times', 'pf-timer' ),
+				'name'               => __( 'PF Timer', 'pf-timer' ),
 				'singular_name'      => __( 'PF  Timer', 'pf-timer' ),
 				'add_new'            => __( 'Add PF Timer', 'pf-timer' ),
 				'add_new_item'       => __( 'Add New PF Timer', 'pf-timer' ),
@@ -313,6 +317,7 @@ class PFTimer {
 	 * Function to Add Column in Admin post list.
 	 *
 	 * @param string $columns custom post list columns.
+	 *
 	 * @return string $columns custom post list columns.
 	 *
 	 * @package PF Timer
@@ -331,7 +336,7 @@ class PFTimer {
 	/**
 	 * Function to Add Column description in Admin post list.
 	 *
-	 * @param string  $column Post List Column for ShortCode.
+	 * @param string $column Post List Column for ShortCode.
 	 * @param integer $post_id Post Id.
 	 *
 	 * @package PF Timer
@@ -384,90 +389,91 @@ class PFTimer {
 		update_post_meta(
 			$post_id,
 			'pf_timer_subtitle',
-			isset( $_POST['pf_timer_subtitle'] ) ? wp_verify_nonce( sanitize_key( $_POST['pf_timer_subtitle'] ) ) : ''
+			isset( $_POST['pf_timer_subtitle'] ) ? sanitize_text_field( $_POST['pf_timer_subtitle'] ) : ''
 		);
 		update_post_meta(
 			$post_id,
 			'pf_timer_expiry_date',
-			isset( $_POST['pf_timer_expiry_date'] ) ? wp_verify_nonce( sanitize_key( $_POST['pf_timer_expiry_date'] ) ) : ''
+			isset( $_POST['pf_timer_expiry_date'] ) ? sanitize_text_field( $_POST['pf_timer_expiry_date'] ) : ''
 		);
 		update_post_meta(
 			$post_id,
 			'pf_timer_timezone',
-			isset( $_POST['pf_timer_timezone'] ) ? wp_verify_nonce( sanitize_key( $_POST['pf_timer_timezone'] ) ) : ''
+			isset( $_POST['pf_timer_timezone'] ) ? sanitize_text_field( $_POST['pf_timer_timezone'] ) : ''
 		);
 		update_post_meta(
 			$post_id,
 			'pf_timer_redirect_url',
-			isset( $_POST['pf_timer_redirect_url'] ) ? wp_verify_nonce( sanitize_key( $_POST['pf_timer_redirect_url'] ) ) : ''
+			isset( $_POST['pf_timer_redirect_url'] ) ? sanitize_text_field( $_POST['pf_timer_redirect_url'] ) : ''
 		);
 		update_post_meta(
 			$post_id,
 			'pf_timer_border_radius',
-			isset( $_POST['pf_timer_border_radius'] ) ? wp_verify_nonce( sanitize_key( $_POST['pf_timer_border_radius'] ) ) : ''
+			isset( $_POST['pf_timer_border_radius'] ) ? sanitize_text_field( $_POST['pf_timer_border_radius'] ) : ''
 		);
 		update_post_meta(
 			$post_id,
 			'pf_timer_bg_color',
-			isset( $_POST['pf_timer_bg_color'] ) ? wp_verify_nonce( sanitize_key( $_POST['pf_timer_bg_color'] ) ) : ''
+			isset( $_POST['pf_timer_bg_color'] ) ? sanitize_text_field( $_POST['pf_timer_bg_color'] ) : ''
 		);
 		update_post_meta(
 			$post_id,
 			'pf_timer_font_color',
-			isset( $_POST['pf_timer_font_color'] ) ? wp_verify_nonce( sanitize_key( $_POST['pf_timer_font_color'] ) ) : ''
+			isset( $_POST['pf_timer_font_color'] ) ? sanitize_text_field( $_POST['pf_timer_font_color'] ) : ''
 		);
 		update_post_meta(
 			$post_id,
 			'pf_timer_font_size',
-			isset( $_POST['pf_timer_font_size'] ) ? wp_verify_nonce( sanitize_key( $_POST['pf_timer_font_size'] ) ) : ''
+			isset( $_POST['pf_timer_font_size'] ) ? sanitize_text_field( $_POST['pf_timer_font_size'] ) : ''
 		);
 		update_post_meta(
 			$post_id,
 			'pf_timer_days_label',
-			isset( $_POST['pf_timer_days_label'] ) ? wp_verify_nonce( sanitize_key( $_POST['pf_timer_days_label'] ) ) : 'Days'
+			isset( $_POST['pf_timer_days_label'] ) ? sanitize_text_field( $_POST['pf_timer_days_label'] ) : 'Days'
 		);
 		update_post_meta(
 			$post_id,
 			'pf_timer_days_label_show',
-			isset( $_POST['pf_timer_days_label_show'] ) ? wp_verify_nonce( sanitize_key( $_POST['pf_timer_days_label_show'] ) ) : '0'
+			isset( $_POST['pf_timer_days_label_show'] ) ? sanitize_text_field( $_POST['pf_timer_days_label_show'] ) : '0'
 		);
 		update_post_meta(
 			$post_id,
 			'pf_timer_hours_label',
-			isset( $_POST['pf_timer_hours_label'] ) ? wp_verify_nonce( sanitize_key( $_POST['pf_timer_hours_label'] ) ) : 'Hours'
+			isset( $_POST['pf_timer_hours_label'] ) ? sanitize_text_field( $_POST['pf_timer_hours_label'] ) : 'Hours'
 		);
 		update_post_meta(
 			$post_id,
 			'pf_timer_hours_label_show',
-			isset( $_POST['pf_timer_hours_label_show'] ) ? wp_verify_nonce( sanitize_key( $_POST['pf_timer_hours_label_show'] ) ) : '0'
+			isset( $_POST['pf_timer_hours_label_show'] ) ?  sanitize_text_field( $_POST['pf_timer_hours_label_show'] )  : '0'
 		);
 		update_post_meta(
 			$post_id,
 			'pf_timer_minutes_label',
-			isset( $_POST['pf_timer_minutes_label'] ) ? wp_verify_nonce( sanitize_key( $_POST['pf_timer_minutes_label'] ) ) : 'Minutes'
+			isset( $_POST['pf_timer_minutes_label'] ) ? sanitize_text_field( $_POST['pf_timer_minutes_label'] )  : 'Minutes'
 		);
 		update_post_meta(
 			$post_id,
 			'pf_timer_minutes_label_show',
-			isset( $_POST['pf_timer_minutes_label_show'] ) ? wp_verify_nonce( sanitize_key( $_POST['pf_timer_minutes_label_show'] ) ) : '0'
+			isset( $_POST['pf_timer_minutes_label_show'] ) ?  sanitize_text_field( $_POST['pf_timer_minutes_label_show'] )  : '0'
 		);
 		update_post_meta(
 			$post_id,
 			'pf_timer_seconds_label',
-			isset( $_POST['pf_timer_seconds_label'] ) ? wp_verify_nonce( sanitize_key( $_POST['pf_timer_seconds_label'] ) ) : 'Seconds'
+			isset( $_POST['pf_timer_seconds_label'] ) ?  sanitize_text_field( $_POST['pf_timer_seconds_label'] )  : 'Seconds'
 		);
 		update_post_meta(
 			$post_id,
 			'pf_timer_seconds_label_show',
-			isset( $_POST['pf_timer_seconds_label_show'] ) ? wp_verify_nonce( sanitize_key( $_POST['pf_timer_seconds_label_show'] ) ) : '0'
+			isset( $_POST['pf_timer_seconds_label_show'] ) ?  sanitize_text_field( $_POST['pf_timer_seconds_label_show'] )  : '0'
 		);
 	}
 
 	/**
 	 * Function to create dynamic timer for pf_timer.
 	 *
-	 * @param array  $attributes Attributes for the ShortCode.
+	 * @param array $attributes Attributes for the ShortCode.
 	 * @param string $content Post content.
+	 *
 	 * @return string $timer Complete Timer HTML.
 	 *
 	 * @package PF Timer
@@ -512,7 +518,7 @@ class PFTimer {
 		$pf_timer_ul_width   = $pf_timer_box_width * 4 + ( 6 * 4 ) + 10;
 		$pf_timer_box_height = ( $pf_timer_font_size * 2 ) + 40;
 
-		$pf_timer_labelfont_size = intval( $pf_timer_font_size * 0.40 );
+		$pf_timer_labelfont_size = intval( $pf_timer_font_size * 0.50 );
 
 		$tz_obj    = new DateTimeZone( $pf_timer_timezone );
 		$today     = new DateTime( 'now', $tz_obj );
@@ -520,7 +526,7 @@ class PFTimer {
 		$endtime   = strtotime( $pf_timer_expiry_date );
 		$remaining = $endtime - $starttime;
 		$timer     = '<style>.pf-timer-container ul {width: ' . $pf_timer_ul_width . 'px !important;} #pf-timer-' . $id . ' ul li .flap { background-color: ' . $pf_timer_bg_color . ' !important; border-radius: ' . $pf_timer_border_radius . 'px !important;width: ' . $pf_timer_box_width . 'px !important;height: ' . $pf_timer_box_height . 'px !important; } #pf-timer-' . $id . ' ul li .flap span {color: ' . $pf_timer_font_color . ' !important;font-size: ' . $pf_timer_font_size . 'px !important;line-height: ' . $pf_timer_font_size . 'px !important;} #pf-timer-' . $id . ' ul p {color: ' . $pf_timer_bg_color . ' !important;font-size: ' . $pf_timer_labelfont_size . 'px !important;line-height: ' . $pf_timer_labelfont_size . 'px !important;padding: ' . $pf_timer_labelfont_size . 'px 0 !important;}</style>';
-		$timer    .= '<div id="pf-timer-' . $id . '" class="pf-timer-container" data-timestamp="' . $remaining . '" data-redirect="' . $pf_timer_redirect_url . '">
+		$timer     .= '<div id="pf-timer-' . $id . '" class="pf-timer-container" data-timestamp="' . $remaining . '" data-redirect="' . $pf_timer_redirect_url . '">
     <ul>
         <li class="' . $pf_timer_days_label_class . '">
             <div class="flap">

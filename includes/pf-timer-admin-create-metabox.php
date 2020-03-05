@@ -462,20 +462,20 @@ $pf_timer_minutes_label_checked = ( 0 === $pf_timer_minutes_label_show ) ? '' : 
 $pf_timer_seconds_label_show    = intval( get_post_meta( $post->ID, 'pf_timer_seconds_label_show', true ) );
 $pf_timer_seconds_label_checked = ( 0 === $pf_timer_seconds_label_show ) ? '' : 'checked';
 ?>
-<table>
+<table xmlns="http://www.w3.org/1999/html">
 
 	<tr style="display: none;">
 		<td>Subtitle</td>
 		<td>
 			<input type="text" id="pf_timer_subtitle" name="pf_timer_subtitle"
-				   value="<?php echo sanitize_key( $pf_timer_subtitle ); ?>"/>
+				   value="<?php echo trim( $pf_timer_subtitle ); ?>"/>
 		</td>
 	</tr>
 	<tr>
 		<td>Expiration Date</td>
 		<td>
 			<input type="text" id="pf_timer_expiry_date" class="pf_timer_expiry_date" name="pf_timer_expiry_date"
-				   value="<?php echo sanitize_key( $pf_timer_expiry_date ); ?>"/>
+				   value="<?php echo trim( $pf_timer_expiry_date ); ?>"/>
 		</td>
 	</tr>
 	<tr>
@@ -485,9 +485,9 @@ $pf_timer_seconds_label_checked = ( 0 === $pf_timer_seconds_label_show ) ? '' : 
 			$options = '';
 			foreach ( $timezones as $key => $value ) {
 				$selected = ( $pf_timer_timezone === $key ) ? 'selected' : '';
-				$options .= '<option value="' . sanitize_key( $key ) . '" ' . sanitize_key( $selected ) . '>' . sanitize_key( $value ) . '</option>';
+				$options .= '<option value="' . $key  . '" ' .  $selected  . '>' .  $value  . '</option>';
 			}
-			echo '<select id="pf_timer_timezone" name="pf_timer_timezone" >' . sanitize_key( $options ) . '</select>';
+			echo '<select id="pf_timer_timezone" name="pf_timer_timezone" >' .  $options  . '</select>';
 			?>
 		</td>
 	</tr>
@@ -495,7 +495,7 @@ $pf_timer_seconds_label_checked = ( 0 === $pf_timer_seconds_label_show ) ? '' : 
 		<td>Redirect Url</td>
 		<td>
 			<input type="text" id="pf_timer_redirect_url" name="pf_timer_redirect_url"
-				   value="<?php echo sanitize_key( $pf_timer_redirect_url ); ?>" placeholder="https://yoururl.com"/>
+				   value="<?php echo trim( $pf_timer_redirect_url ); ?>" placeholder="https://yoururl.com"/>
 		</td>
 	</tr>
 	<tr>
@@ -504,10 +504,10 @@ $pf_timer_seconds_label_checked = ( 0 === $pf_timer_seconds_label_show ) ? '' : 
 			<div class="slidecontainer">
 				<input type="range" min="1" max="100" id="pf_timer_border_radius"
 					   name="pf_timer_border_radius"
-					   value="<?php echo sanitize_key( $pf_timer_border_radius ); ?>"
+					   value="<?php echo trim( $pf_timer_border_radius ); ?>"
 					   class="pf_timer_slider"/>
 				<span id="pf_timer_border_radius_span">
-					<?php echo sanitize_key( $pf_timer_border_radius ); ?>px
+					<?php echo trim( $pf_timer_border_radius ); ?>px
 				</span>
 			</div>
 		</td>
@@ -516,7 +516,7 @@ $pf_timer_seconds_label_checked = ( 0 === $pf_timer_seconds_label_show ) ? '' : 
 		<td>Background Color</td>
 		<td>
 			<input type="text" id="pf_timer_bg_color" name="pf_timer_bg_color"
-				   value="<?php echo sanitize_key( $pf_timer_bg_color ); ?>"
+				   value="<?php echo trim( $pf_timer_bg_color ); ?>"
 				   class="pf_timer_bg_color"
 				   data-default-color="#555555"/>
 		</td>
@@ -525,7 +525,7 @@ $pf_timer_seconds_label_checked = ( 0 === $pf_timer_seconds_label_show ) ? '' : 
 		<td>Text Color</td>
 		<td>
 			<input type="text" id="pf_timer_font_color" name="pf_timer_font_color"
-				   value="<?php echo sanitize_key( $pf_timer_font_color ); ?>" class="pf_timer_font_color"
+				   value="<?php echo trim( $pf_timer_font_color ); ?>" class="pf_timer_font_color"
 				   data-default-color="#efefef"/>
 		</td>
 	</tr>
@@ -535,57 +535,60 @@ $pf_timer_seconds_label_checked = ( 0 === $pf_timer_seconds_label_show ) ? '' : 
 			<div class="slidecontainer">
 				<input type="range" min="12" max="100" id="pf_timer_font_size"
 					   name="pf_timer_font_size"
-					   value="<?php echo sanitize_key( $pf_timer_font_size ); ?>"
+					   value="<?php echo trim( $pf_timer_font_size ); ?>"
 					   class="pf_timer_slider"/>
 				<span id="pf_timer_font_size_span">
-					<?php echo sanitize_key( $pf_timer_font_size ); ?>px
+					<?php echo trim( $pf_timer_font_size ); ?>px
 				</span>
 			</div>
 		</td>
 	</tr>
 
-</table>
-<h2>Labels</h2>
-<table>
-
+<tr>
+    <td colspan="2">
+        <hr/>
+        <strong>Labels</strong>
+        <hr/>
+    </td>
+</tr>
 	<tr>
 		<td>Days Label</td>
 		<td>
 			<input type="text" id="pf_timer_days_label" name="pf_timer_days_label"
-				   value="<?php echo sanitize_key( $pf_timer_days_label ); ?>"/>
+				   value="<?php echo trim( $pf_timer_days_label ); ?>"/>
 			<input type="checkbox" id="pf_timer_days_label_show"
-				   name="pf_timer_days_label_show" <?php echo sanitize_key( $pf_timer_days_label_checked ); ?>
-				   value="1">
+				   name="pf_timer_days_label_show" <?php echo trim( $pf_timer_days_label_checked ); ?>
+				   value="1">Show
 		</td>
 	</tr>
 	<tr>
 		<td>Hours Label</td>
 		<td>
 			<input type="text" id="pf_timer_hours_label" name="pf_timer_hours_label"
-				   value="<?php echo sanitize_key( $pf_timer_hours_label ); ?>"/>
+				   value="<?php echo trim( $pf_timer_hours_label ); ?>"/>
 			<input type="checkbox" id="pf_timer_hours_label_show"
-				   name="pf_timer_hours_label_show" <?php echo sanitize_key( $pf_timer_hours_label_checked ); ?>
-				   value="1">
+				   name="pf_timer_hours_label_show" <?php echo trim( $pf_timer_hours_label_checked ); ?>
+				   value="1">Show
 		</td>
 	</tr>
 	<tr>
 		<td>Minutes Label</td>
 		<td>
 			<input type="text" id="pf_timer_minutes_label" name="pf_timer_minutes_label"
-				   value="<?php echo sanitize_key( $pf_timer_minutes_label ); ?>"/>
+				   value="<?php echo trim( $pf_timer_minutes_label ); ?>"/>
 			<input type="checkbox" id="pf_timer_minutes_label_show"
-				   name="pf_timer_minutes_label_show" <?php echo sanitize_key( $pf_timer_minutes_label_checked ); ?>
-				   value="1">
+				   name="pf_timer_minutes_label_show" <?php echo trim( $pf_timer_minutes_label_checked ); ?>
+				   value="1">Show
 		</td>
 	</tr>
 	<tr>
 		<td>Seconds Label</td>
 		<td>
 			<input type="text" id="pf_timer_seconds_label" name="pf_timer_seconds_label"
-				   value="<?php echo sanitize_key( $pf_timer_seconds_label ); ?>"/>
+				   value="<?php echo trim( $pf_timer_seconds_label ); ?>"/>
 			<input type="checkbox" id="pf_timer_seconds_label_show"
-				   name="pf_timer_seconds_label_show" <?php echo sanitize_key( $pf_timer_seconds_label_checked ); ?>
-				   value="1">
+				   name="pf_timer_seconds_label_show" <?php echo trim( $pf_timer_seconds_label_checked ); ?>
+				   value="1">Show
 		</td>
 	</tr>
 </table>
