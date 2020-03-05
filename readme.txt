@@ -41,11 +41,3 @@ The easiest way to place your full customizable HTML5 Countdown Timer.
 2. Activate the "PF Timer" plugin through the 'Plugins' screen in WordPress
 3. Add a new page and add desired short code in that.
 
-
-== Screenshots ==
-1. Front end display
-2. Front end display
-3. Setting
-4. Also work with Gutenberg shortcode block.
-
-
