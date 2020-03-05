@@ -1,6 +1,5 @@
 === PF Timer ===
-Contributors: (this should be a list of wordpress.org userid's)
-Donate link: https://example.com/
+Contributors: profitfunnels,nehasharma8944,erbhagwatsingh
 Tags: timer, countdown timer, countdown ,lightweight timer,html timer, wordpress timer
 Requires at least: 4.0
 Tested up to: 5.3.2
