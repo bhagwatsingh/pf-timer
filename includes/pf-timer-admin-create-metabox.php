@@ -455,7 +455,7 @@ $pf_timer_seconds_label_checked = ( $pf_timer_seconds_label_show == '0' ) ? '' :
 ?>
 <table>
 
-    <tr>
+    <tr style="display: none;">
         <td>Subtitle</td>
         <td>
             <input type="text" id="pf_timer_subtitle" name="pf_timer_subtitle" value="<?php echo $pf_timer_subtitle ?>"/>
