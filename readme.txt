@@ -27,7 +27,7 @@ The easiest way to place your full customizable HTML5 Countdown Timer.
 
 = Features of WordPress PF Timer =
 * Ability to create unlimited Countdowns timer.
-* Ability to create Countdown in pages/posts.
+* Ability to create Countdown timer in pages/posts.
 * Ability to change background color and width.
 * Ability to change timezones.
 * Ability to set redirect url to redirect after the countdown time is completed
