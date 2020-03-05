@@ -173,7 +173,7 @@ class PFTimer {
 	 * @since 1.0.0
 	 */
 	public function pf_timer__action_links( $links = '' ) {
-		$link  = '<a href="' . esc_url( admin_url( '/edit.php?post_type=pf_timer' ) ) . '">';
+		$link  = '<a href="' . esc_url( admin_url( '/edit.php?post_type=pf-timer' ) ) . '">';
 		$links = array_merge( array( $link . __( 'Settings', 'textdomain' ) . '</a>' ), $links );
 
 		return $links;
