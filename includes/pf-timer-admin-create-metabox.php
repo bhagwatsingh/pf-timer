@@ -1,6 +1,16 @@
 <?php
+/**
+ * PFTimer Admin - Create/Edit Settings
+ *
+ * @category UI
+ * @package PFTimer
+ * @since 1.0.0
+ * @subpackage PFTimer/includes
+ * @author Team Profit-Funnels
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+	exit();
 }
 
 global $post;

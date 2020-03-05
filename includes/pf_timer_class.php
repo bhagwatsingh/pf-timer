@@ -1,5 +1,23 @@
 <?php
+/**
+ * PFTimer main class
+ *
+ * @category Class
+ * @package PFTimer
+ * @since 1.0.0
+ * @subpackage PFTimer/includes
+ * @author Team Profit-Funnels
+ */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit();
+}
+
+/**
+ * Class main
+ *
+ * @since    1.0.0
+ */
 class PFTimer {
 	/**
 	 * Holds the values to be used in the fields callbacks
@@ -10,41 +28,9 @@ class PFTimer {
 	 * Start up
 	 */
 	public function __construct() {
-
-		//Create pf_timer post labels
-		$pf_timer_post_lbls = apply_filters( 'pf_timer_post_labels',
-			array(
-				'name'               => __( 'PF Timer', PF_TIMER_SLUG ),
-				'singular_name'      => __( 'WP Countdown Timer', PF_TIMER_SLUG ),
-				'add_new'            => __( 'Add PF Timer', PF_TIMER_SLUG ),
-				'add_new_item'       => __( 'Add New PF Timer', PF_TIMER_SLUG ),
-				'edit_item'          => __( 'Edit PF Timer', PF_TIMER_SLUG ),
-				'new_item'           => __( 'New PF Timer', PF_TIMER_SLUG ),
-				'view_item'          => __( 'View PF Timer', PF_TIMER_SLUG ),
-				'search_items'       => __( 'Search PF Timer', PF_TIMER_SLUG ),
-				'not_found'          => __( 'No PF Timer Found', PF_TIMER_SLUG ),
-				'not_found_in_trash' => __( 'No PF Timer Found in Trash', PF_TIMER_SLUG ),
-				'parent_item_colon'  => '',
-				'menu_name'          => __( 'PF Timer', PF_TIMER_SLUG )
-			) );
-
-		$pf_timer_args = array(
-			'labels'          => $pf_timer_post_lbls,
-			'public'          => false,
-			'show_ui'         => true,
-			'query_var'       => false,
-			'rewrite'         => false,
-			'capability_type' => 'post',
-			'hierarchical'    => false,
-			'menu_icon'       => 'dashicons-clock',
-			'supports'        => array( 'title' ),
-		);
-
-		// Register pf_timer post type
-		register_post_type( PF_TIMER_POST_TYPE, $pf_timer_args );
-
+		add_action( 'init', array( $this, 'create_post_type' ) );
 		add_action( 'admin_init', function () {
-			remove_post_type_support( PF_TIMER_POST_TYPE, 'editor' );
+			remove_post_type_support( PF_TIMER_PLUGIN_POST_TYPE, 'editor' );
 		}, 99 );
 
 		add_shortcode( 'pf-timer', array( $this, 'pf_timer_shortcode' ) );
@@ -57,7 +43,7 @@ class PFTimer {
 			add_action( 'manage_pf_timer_posts_custom_column', array( $this, 'pf_timer_column' ), 10, 2 );
 
 			//Add Action links to plugins list
-			add_action( 'plugin_action_links_' . PF_TIMER_PLUGIN_BASENAME, array( $this, 'pf_timer__action_links' ) );
+			add_action( 'plugin_action_links_' . PF_TIMER_PLUGIN_PLUGIN_BASENAME, array( $this, 'pf_timer__action_links' ) );
 
 			// Add metaboxes for timer settings
 			add_action( 'add_meta_boxes', array( $this, 'pf_timer_post_sett_metabox' ) );
@@ -87,7 +73,7 @@ class PFTimer {
 		 * @package PF Timer
 		 * @since 1.0.0
 		 */
-		register_activation_hook( PF_TIMER_BASE_FILE, array( $this, 'pf_timer_install' ) );
+		register_activation_hook( PF_TIMER_PLUGIN_BASE_FILE, array( $this, 'pf_timer_install' ) );
 
 		/**
 		 * Deactivation Hook
@@ -97,7 +83,46 @@ class PFTimer {
 		 * @package PF Timer
 		 * @since 1.0.0
 		 */
-		register_deactivation_hook( PF_TIMER_BASE_FILE, array( $this, 'pf_timer_uninstall' ) );
+		register_deactivation_hook( PF_TIMER_PLUGIN_BASE_FILE, array( $this, 'pf_timer_uninstall' ) );
+	}
+
+	/**
+	 * Create Custom Post Type
+	 *
+	 * @since    1.0.0
+	 */
+	public function create_post_type() {
+		//Create pf_timer post labels
+		$pf_timer_post_lbls = apply_filters( 'pf_timer_post_labels',
+		                                     array(
+			                                     'name'               => __( 'PF Timer', PF_TIMER_PLUGIN_SLUG ),
+			                                     'singular_name'      => __( 'WP Countdown Timer', PF_TIMER_PLUGIN_SLUG ),
+			                                     'add_new'            => __( 'Add PF Timer', PF_TIMER_PLUGIN_SLUG ),
+			                                     'add_new_item'       => __( 'Add New PF Timer', PF_TIMER_PLUGIN_SLUG ),
+			                                     'edit_item'          => __( 'Edit PF Timer', PF_TIMER_PLUGIN_SLUG ),
+			                                     'new_item'           => __( 'New PF Timer', PF_TIMER_PLUGIN_SLUG ),
+			                                     'view_item'          => __( 'View PF Timer', PF_TIMER_PLUGIN_SLUG ),
+			                                     'search_items'       => __( 'Search PF Timer', PF_TIMER_PLUGIN_SLUG ),
+			                                     'not_found'          => __( 'No PF Timer Found', PF_TIMER_PLUGIN_SLUG ),
+			                                     'not_found_in_trash' => __( 'No PF Timer Found in Trash', PF_TIMER_PLUGIN_SLUG ),
+			                                     'parent_item_colon'  => '',
+			                                     'menu_name'          => __( 'PF Timer', PF_TIMER_PLUGIN_SLUG )
+		                                     ) );
+
+		$pf_timer_args = array(
+			'labels'          => $pf_timer_post_lbls,
+			'public'          => false,
+			'show_ui'         => true,
+			'query_var'       => false,
+			'rewrite'         => false,
+			'capability_type' => 'post',
+			'hierarchical'    => false,
+			'menu_icon'       => 'dashicons-clock',
+			'supports'        => array( 'title' ),
+		);
+
+		// Register pf_timer post type
+		register_post_type( PF_TIMER_PLUGIN_POST_TYPE, $pf_timer_args );
 	}
 
 	/**
@@ -110,6 +135,7 @@ class PFTimer {
 	 * @since 1.0.0
 	 */
 	public function pf_timer_install() {
+		$this->create_post_type();
 		// IMP need to flush rules for custom registered post type
 		flush_rewrite_rules();
 	}
@@ -149,7 +175,7 @@ class PFTimer {
 	 */
 	function pf_timer_front_style() {
 		// Registring default style
-		wp_register_style( 'pf-front-style', PF_TIMER_URL . 'assets/css/pf-front-style.css', null, PF_TIMER_VERSION );
+		wp_register_style( 'pf-front-style', PF_TIMER_PLUGIN_URL . 'assets/css/pf-front-style.css', null, PF_TIMER_PLUGIN_VERSION );
 		wp_enqueue_style( 'pf-front-style' );
 	}
 
@@ -162,9 +188,9 @@ class PFTimer {
 	function pf_timer_front_script() {
 		// Registring default script
 		wp_register_script( 'pf-front-script-js',
-			PF_TIMER_URL . 'assets/js/pf-front-script.js',
+			PF_TIMER_PLUGIN_URL . 'assets/js/pf-front-script.js',
 			array( 'jquery' ),
-			PF_TIMER_VERSION,
+			PF_TIMER_PLUGIN_VERSION,
 			true );
 		wp_enqueue_script( 'pf-front-script-js' );
 	}
@@ -179,16 +205,16 @@ class PFTimer {
 		global $post_type;
 
 		// If page is plugin setting page then enqueue script
-		if ( $post_type == PF_TIMER_POST_TYPE ) {
+		if ( $post_type == PF_TIMER_PLUGIN_POST_TYPE ) {
 			wp_enqueue_style( 'wp-color-picker' );
 			wp_register_style( 'pf-ui-timepicker-addon',
-				PF_TIMER_URL . 'assets/css/pf-ui-timepicker-addon.css',
+				PF_TIMER_PLUGIN_URL . 'assets/css/pf-ui-timepicker-addon.css',
 				null,
-				PF_TIMER_VERSION );
+				PF_TIMER_PLUGIN_VERSION );
 			wp_enqueue_style( 'pf-ui-timepicker-addon' );
 
 			// Registring default style
-			wp_register_style( 'pf-style', PF_TIMER_URL . 'assets/css/pf-style.css', null, PF_TIMER_VERSION );
+			wp_register_style( 'pf-style', PF_TIMER_PLUGIN_URL . 'assets/css/pf-style.css', null, PF_TIMER_PLUGIN_VERSION );
 			wp_enqueue_style( 'pf-style' );
 		}
 	}
@@ -203,23 +229,23 @@ class PFTimer {
 		global $post_type;
 
 		// If page is plugin setting page then enqueue script
-		if ( $post_type == PF_TIMER_POST_TYPE ) {
+		if ( $post_type == PF_TIMER_PLUGIN_POST_TYPE ) {
 			wp_enqueue_script( 'wp-color-picker' );
 			wp_enqueue_script( 'jquery-ui-datepicker' );
 
 			wp_register_script( 'pf-ui-timepicker-addon-js',
-				PF_TIMER_URL . 'assets/js/pf-ui-timepicker-addon.js',
+				PF_TIMER_PLUGIN_URL . 'assets/js/pf-ui-timepicker-addon.js',
 				array( 'jquery' ),
-				PF_TIMER_VERSION,
+				PF_TIMER_PLUGIN_VERSION,
 				true );
 			wp_enqueue_script( 'pf-ui-timepicker-addon-js' );
 
 
 			// Registring default script
 			wp_register_script( 'pf-script-js',
-				PF_TIMER_URL . 'assets/js/pf-script.js',
+				PF_TIMER_PLUGIN_URL . 'assets/js/pf-script.js',
 				array( 'jquery' ),
-				PF_TIMER_VERSION,
+				PF_TIMER_PLUGIN_VERSION,
 				true );
 			wp_enqueue_script( 'pf-script-js' );
 		}
@@ -234,18 +260,18 @@ class PFTimer {
 	public function add_pf_timer_admin_page() {
 		$pf_timer_post_lbls = apply_filters( 'pf_timer_post_labels',
 			array(
-				'name'               => __( 'PF Times', PF_TIMER_SLUG ),
-				'singular_name'      => __( 'PF  Timer', PF_TIMER_SLUG ),
-				'add_new'            => __( 'Add PF Timer', PF_TIMER_SLUG ),
-				'add_new_item'       => __( 'Add New PF Timer', PF_TIMER_SLUG ),
-				'edit_item'          => __( 'Edit PF Timer', PF_TIMER_SLUG ),
-				'new_item'           => __( 'New PF Timer', PF_TIMER_SLUG ),
-				'view_item'          => __( 'View PF Timer', PF_TIMER_SLUG ),
-				'search_items'       => __( 'Search PF Timer', PF_TIMER_SLUG ),
-				'not_found'          => __( 'No PF Timer Found', PF_TIMER_SLUG ),
-				'not_found_in_trash' => __( 'No PF Timer Found in Trash', PF_TIMER_SLUG ),
+				'name'               => __( 'PF Times', PF_TIMER_PLUGIN_SLUG ),
+				'singular_name'      => __( 'PF  Timer', PF_TIMER_PLUGIN_SLUG ),
+				'add_new'            => __( 'Add PF Timer', PF_TIMER_PLUGIN_SLUG ),
+				'add_new_item'       => __( 'Add New PF Timer', PF_TIMER_PLUGIN_SLUG ),
+				'edit_item'          => __( 'Edit PF Timer', PF_TIMER_PLUGIN_SLUG ),
+				'new_item'           => __( 'New PF Timer', PF_TIMER_PLUGIN_SLUG ),
+				'view_item'          => __( 'View PF Timer', PF_TIMER_PLUGIN_SLUG ),
+				'search_items'       => __( 'Search PF Timer', PF_TIMER_PLUGIN_SLUG ),
+				'not_found'          => __( 'No PF Timer Found', PF_TIMER_PLUGIN_SLUG ),
+				'not_found_in_trash' => __( 'No PF Timer Found in Trash', PF_TIMER_PLUGIN_SLUG ),
 				'parent_item_colon'  => '',
-				'menu_name'          => __( 'PF Timer', PF_TIMER_SLUG )
+				'menu_name'          => __( 'PF Timer', PF_TIMER_PLUGIN_SLUG )
 			) );
 
 		$pf_timer_args = array(
@@ -261,7 +287,7 @@ class PFTimer {
 		);
 
 		// Register pf_timer post type
-		register_post_type( PF_TIMER_POST_TYPE, $pf_timer_args );
+		register_post_type( PF_TIMER_PLUGIN_POST_TYPE, $pf_timer_args );
 	}
 
 	/**
@@ -274,7 +300,7 @@ class PFTimer {
 		$columns = array(
 			'cb'        => $columns['cb'],
 			'title'     => __( 'Title' ),
-			'shortcode' => __( 'Shortcode', PF_TIMER_POST_TYPE )
+			'shortcode' => __( 'Shortcode', PF_TIMER_PLUGIN_POST_TYPE )
 		);
 
 		return $columns;
@@ -303,9 +329,9 @@ class PFTimer {
 
 	function pf_timer_post_sett_metabox() {
 		add_meta_box( 'pf-timer-post-sett',
-			__( 'PF Timer Settings', PF_TIMER_POST_TYPE ),
+			__( 'PF Timer Settings', PF_TIMER_PLUGIN_POST_TYPE ),
 			array( $this, 'pf_timer_post_sett_mb_content' ),
-			PF_TIMER_POST_TYPE,
+			PF_TIMER_PLUGIN_POST_TYPE,
 			'normal',
 			'high' );
 	}
@@ -317,7 +343,7 @@ class PFTimer {
 	 */
 
 	function pf_timer_post_sett_mb_content() {
-		include_once( PF_TIMER_DIR . '/includes/pf-timer-admin-create-metabox.php' );
+		include_once( PF_TIMER_PLUGIN_DIR . '/includes/pf-timer-admin-create-metabox.php' );
 	}
 
 	/**
