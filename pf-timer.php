@@ -43,10 +43,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'PF_TIMER_PLUGIN_VERSION' ) ) {
-	define( 'PF_TIMER_PLUGIN_VERSION', '1.0.1' ); // // Current version of plugin.
-}
-if ( ! defined( 'PF_TIMER_PLUGIN_POST_TYPE' ) ) {
-	define( 'PF_TIMER_PLUGIN_POST_TYPE', 'pf_timer' ); // Plugin post type.
+	define( 'PF_TIMER_PLUGIN_VERSION', '1.0.0' ); // // Current version of plugin.
 }
 if ( ! defined( 'PF_TIMER_PLUGIN_SLUG' ) ) {
 	define( 'PF_TIMER_PLUGIN_SLUG', PF_TIMER_PLUGIN_POST_TYPE ); // Plugin slug.
