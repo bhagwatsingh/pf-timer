@@ -1,12 +1,12 @@
 === PF Timer ===
-Contributors: profitfunnels,nehasharma8944,erbhagwatsingh
-Tags: timer, countdown timer, countdown ,lightweight timer,html timer, wordpress timer
+Contributors: profitfunnels, nehasharma8944, erbhagwatsingh
+Tags: timer, countdown timer, countdown, lightweight timer, html timer, wordpress timer
 Requires at least: 4.0
 Tested up to: 5.3.2
 Stable tag: 4.3
 Requires PHP: 5.2.4
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License: GPLv3 or later
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 A quick, easy way to add and display responsive timer on your website.
 
@@ -20,7 +20,7 @@ You can create countdown timer and display them with shortcode.
 The easiest way to place your full customizable HTML5 Countdown Timer.
 
 = Complete shortcode with all parameters: =
-<code>[pf-timer id="1"]</code>
+[pf-timer id="1"]
 
 * **ID:** [pf-timer id="1"] (timer id for which you want to display timer. This parameter is required.)
 
@@ -30,7 +30,6 @@ The easiest way to place your full customizable HTML5 Countdown Timer.
 * Ability to change background color and width.
 * Ability to change timezones.
 * Ability to set redirect url to redirect after the countdown time is completed
-* Ability to change rotating circle background color and width.
 * Option change the text of Days, hours, minutes and seconds OR show/hide Days, hours, minutes and seconds.
 * Light weight and fast
 

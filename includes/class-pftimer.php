@@ -434,7 +434,7 @@ class PFTimer {
 		update_post_meta(
 			$post_id,
 			'pf_timer_days_label_show',
-			isset( $_POST['pf_timer_days_label_show'] ) ? sanitize_text_field( $_POST['pf_timer_days_label_show'] ) : '0'
+			isset( $_POST['pf_timer_days_label_show'] ) ? sanitize_text_field( $_POST['pf_timer_days_label_show'] ) : ''
 		);
 		update_post_meta(
 			$post_id,
@@ -444,7 +444,7 @@ class PFTimer {
 		update_post_meta(
 			$post_id,
 			'pf_timer_hours_label_show',
-			isset( $_POST['pf_timer_hours_label_show'] ) ?  sanitize_text_field( $_POST['pf_timer_hours_label_show'] )  : '0'
+			isset( $_POST['pf_timer_hours_label_show'] ) ?  sanitize_text_field( $_POST['pf_timer_hours_label_show'] )  : ''
 		);
 		update_post_meta(
 			$post_id,
@@ -454,7 +454,7 @@ class PFTimer {
 		update_post_meta(
 			$post_id,
 			'pf_timer_minutes_label_show',
-			isset( $_POST['pf_timer_minutes_label_show'] ) ?  sanitize_text_field( $_POST['pf_timer_minutes_label_show'] )  : '0'
+			isset( $_POST['pf_timer_minutes_label_show'] ) ?  sanitize_text_field( $_POST['pf_timer_minutes_label_show'] )  : ''
 		);
 		update_post_meta(
 			$post_id,
@@ -464,7 +464,7 @@ class PFTimer {
 		update_post_meta(
 			$post_id,
 			'pf_timer_seconds_label_show',
-			isset( $_POST['pf_timer_seconds_label_show'] ) ?  sanitize_text_field( $_POST['pf_timer_seconds_label_show'] )  : '0'
+			isset( $_POST['pf_timer_seconds_label_show'] ) ?  sanitize_text_field( $_POST['pf_timer_seconds_label_show'] )  : ''
 		);
 	}
 
