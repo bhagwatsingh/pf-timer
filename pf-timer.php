@@ -1,13 +1,13 @@
 <?php
 /**
- * PF Timer Plugin
+ * PF Timer
  *
  * @package PFTimer
  * @copyright Copyright (C) 2020, Profit-Funnels.In
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License, version 3 or higher
  *
  * @wordpress-plugin
- * Plugin Name: PF Timer Plugin
+ * Plugin Name: PF Timer
  * Version: 1.0.0
  * Plugin URI: https://plugins.profit-funnels.in/
  * Description: PF Countdown Timer Plugin
